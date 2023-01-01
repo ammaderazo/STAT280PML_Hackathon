@@ -3,6 +3,7 @@ import tldextract
 import pandas as pd 
 import nltk
 stopwords = nltk.download('stopwords')
+stopwords = set(stopwords.words('english'))
 from collections import Counter
 stopwords_dict = Counter(stopwords)
 import pickle 
@@ -32,7 +33,7 @@ def clean_sms(df):
     df['text'] = df['text'].str.replace(r'\s+', ' ')                                                                                #remove the whitespace between twems with single space
     df['text'] = df['text'].str.replace(r'^\s+|\s*?$', ' ')                                                                         #remove extra spaces before and after the texts
     df['text'] = df['text'].str.lower()                                                                                             #change the words to lower case 
-    df['text'] = df['text'].apply(lambda x: ' '.join(term for term in x.split() if term not in stopwords_dict))                          #remove stopwords such as the, an, a, in, but, because, etc...
+    df['text'] = df['text'].apply(lambda x: ' '.join(term for term in x.split() if term not in stopwords))                          #remove stopwords such as the, an, a, in, but, because, etc...
     return df
 
 format_url = pickle.load(open('URL_format_urls.pickle', 'rb'))
