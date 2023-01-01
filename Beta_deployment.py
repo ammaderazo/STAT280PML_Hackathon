@@ -1,11 +1,10 @@
 import dill 
 import tldextract 
 import pandas as pd 
-from nltk.corpus import stopwords
-stopwords = set(stopwords.words('english'))
+import nltk
+stopwords = nltk.download('stopwords')
 import pickle 
 import warnings
-import re
 warnings.filterwarnings("ignore")
 from urlextract import URLExtract
 extractor = URLExtract()
