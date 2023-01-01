@@ -20,7 +20,6 @@ st.caption("WebApp Deployment for Demo for PML Hackathon [Beta Ver.]")
 
 df = pd.read_csv('stopwords.csv')
 stopwords = list(df['i'])
-stopwords
 
 def clean_sms(df):
     df['text'] = df['text'].str.replace(r'^.+@[^\.].*\.[a-z]{2,}$', 'emailad')                                                      #replaces detected email address to "emailad"
