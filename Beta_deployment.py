@@ -2,10 +2,6 @@ import dill
 import tldextract 
 import pandas as pd 
 import nltk
-stopwords = nltk.download('stopwords')
-stopwords = set(stopwords.words('english'))
-from collections import Counter
-stopwords_dict = Counter(stopwords)
 import pickle 
 import warnings
 warnings.filterwarnings("ignore")
@@ -22,6 +18,9 @@ st.set_page_config(layout="wide")
 st.header("Fraud Detection Demo")
 st.caption("WebApp Deployment for Demo for PML Hackathon [Beta Ver.]")
 
+df = pd.read_csv('stopwords.csv')
+stopwords = list(df['i'])
+stopwords
 
 def clean_sms(df):
     df['text'] = df['text'].str.replace(r'^.+@[^\.].*\.[a-z]{2,}$', 'emailad')                                                      #replaces detected email address to "emailad"
