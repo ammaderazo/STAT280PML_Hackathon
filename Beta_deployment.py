@@ -19,7 +19,20 @@ st.set_page_config(layout="wide")
 st.header("Fraud Detection Demo")
 st.caption("WebApp Deployment for Demo for PML Hackathon [Beta Ver.]")
 
-clean_sms = dill.load(open('sms_clean_input.pickle', 'rb'))                                
+
+def clean_sms(df):
+    df['text'] = df['text'].str.replace(r'^.+@[^\.].*\.[a-z]{2,}$', 'emailad')                                                      #replaces detected email address to "emailad"
+    df['text'] = df['text'].str.replace(r'^http\://[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(/\S*)?$', 'url')                                 #replaces detected url to "url"
+    df['text'] = df['text'].str.replace(r'£|\$', 'moneysym ')                                                                       #replace detected currency symbol to the string "money-sym"
+    df['text'] = df['text'].str.replace(r'^\(?[\d]{3}\)?[\s-]?[\d]{3}[\s-]?[\d]{4}$', 'phone-num')                                  #replace detected phone number to the string "phone-num"
+    df['text'] = df['text'].str.replace(r'\d+(\.\d+)?', 'num')                                                                      #replace detected number to the string "num"
+    df['text'] = df['text'].str.replace(r'[^\w\d\s]', ' ')                                                                          #remove the punctuation 
+    df['text'] = df['text'].str.replace(r'\s+', ' ')                                                                                #remove the whitespace between twems with single space
+    df['text'] = df['text'].str.replace(r'^\s+|\s*?$', ' ')                                                                         #remove extra spaces before and after the texts
+    df['text'] = df['text'].str.lower()                                                                                             #change the words to lower case 
+    df['text'] = df['text'].apply(lambda x: ' '.join(term for term in x.split() if term not in stopwords))                          #remove stopwords such as the, an, a, in, but, because, etc...
+    return df
+
 format_url = pickle.load(open('URL_format_urls.pickle', 'rb'))
 sms_detection = pickle.load(open('sms_fraud_mod.sav', 'rb'))
 tfidf_model = pickle.load(open('tfidf_model.sav', 'rb'))
