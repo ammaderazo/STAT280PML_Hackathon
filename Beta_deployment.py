@@ -90,7 +90,7 @@ def detect_fraud_sms(sms):
 
 
 
-sms = st.text_area("SMS to Investigate", key = "text")
+sms = st.text_area("SMS/Email/Text to Investigate", key = "text")
 
 col1, col2 = st.columns([10,1])
 
