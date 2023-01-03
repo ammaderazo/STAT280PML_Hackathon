@@ -13,7 +13,10 @@ import time
 import cloudpickle
 import lightgbm
 import re
- 
+from PIL import Image
+
+image = Image.open('Hackathon_Webapp\DetectifAI.jpg')
+st.image(image)
 st.set_page_config(layout="wide")
 st.header("Fraud Detection Demo")
 st.caption("WebApp Deployment for Demo for PML Hackathon [Beta Ver.]")
