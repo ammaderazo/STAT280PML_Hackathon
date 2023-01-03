@@ -15,11 +15,13 @@ import lightgbm
 import re
 from PIL import Image
 
+st.set_page_config(layout="wide")
+
 image = Image.open('DetectifAI.jpg')
 st.image(image)
-st.set_page_config(layout="wide")
-st.header("Fraud Detection Demo")
-st.caption("WebApp Deployment for Demo for PML Hackathon [Beta Ver.]")
+
+st.header("WebApp Deployment for Demo for PML Hackathon [Beta Ver.]")
+#st.caption("WebApp Deployment for Demo for PML Hackathon [Beta Ver.]")
 
 df = pd.read_csv('stopwords.csv')
 stopwords = list(df['i'])
