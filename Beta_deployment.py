@@ -90,58 +90,58 @@ col1, col2 = st.columns([10,1])
 
 with col1:
     if st.button("Enter"):
-    sms_result = detect_fraud_sms(sms)
-    url_result = detect_fraud_urls(sms)
-    with st.spinner('Analyzing the Input'):
-        time.sleep(5)
-        st.success('SMS/Email/Text checked!!')
-    try: 
-        malicious_df = url_result[url_result['type'] == 'Malicious']
-    except Exception:
-        malicious_df = pd.DataFrame()
+        sms_result = detect_fraud_sms(sms)
+        url_result = detect_fraud_urls(sms)
+        with st.spinner('Analyzing the Input'):
+            time.sleep(5)
+            st.success('SMS/Email/Text checked!!')
+        try: 
+            malicious_df = url_result[url_result['type'] == 'Malicious']
+        except Exception:
+            malicious_df = pd.DataFrame()
 
-    if ((sms_result == 1) & (len(url_result) == 0)):
-        st.Image('detectedIMG', width = 200)
-        st.write("Malicious Activity Detected!")
+        if ((sms_result == 1) & (len(url_result) == 0)):
+            st.Image('detectedIMG', width = 200)
+            st.write("Malicious Activity Detected!")
+            
+        elif ((sms_result == 1) & (len(malicious_df) > 0)):
+            col1, col2, col3 = st.column([2,2,1])
+            with col1:
+                st.write(" ")
+            with col2:
+                st.image(detectedIMG, width = 200)
+                st.write("Malicious Activity Detected!")
+                st.write("List of detected malicious URLs:")
+                st.write(malicious_df)
+                st.write("List of all the URLs found:")
+                st.write(url_result)
+            with col3: 
+                st.write(" ")
         
-    elif ((sms_result == 1) & (len(malicious_df) > 0)):
-        col1, col2, col3 = st.column([2,2,1])
-        with col1:
-            st.write(" ")
-        with col2:
-            st.image(detectedIMG, width = 200)
-            st.write("Malicious Activity Detected!")
-            st.write("List of detected malicious URLs:")
-            st.write(malicious_df)
-            st.write("List of all the URLs found:")
-            st.write(url_result)
-        with col3: 
-            st.write(" ")
-    
 
-    elif ((sms_result == 0) & (len(malicious_df) > 0)):
-        col1, col2, col3 = st.columns([2,2,1])
-        with col1: 
-            st.write(" ")
-        with col2: 
-            st.image(detectedIMG, width = 200)
-            st.write("Malicious Activity Detected!")
-            st.write("List of detected malicious URLs:")
-            st.write(malicious_df)
-            st.write("List of all the URLs found:")
-            st.write(url_result)
-        with col3: 
-            st.write(" ")
+        elif ((sms_result == 0) & (len(malicious_df) > 0)):
+            col1, col2, col3 = st.columns([2,2,1])
+            with col1: 
+                st.write(" ")
+            with col2: 
+                st.image(detectedIMG, width = 200)
+                st.write("Malicious Activity Detected!")
+                st.write("List of detected malicious URLs:")
+                st.write(malicious_df)
+                st.write("List of all the URLs found:")
+                st.write(url_result)
+            with col3: 
+                st.write(" ")
 
-    elif ((sms_result == 0) & ((len(malicious_df) == 0) | (len(url_result) == 0))):
-        col1, col2, col3 = st.columns([2,2,1])
-        with col1: 
-            st.write(" ")
-        with col2: 
-            st.image(checkIMG)
-            st.write("No Malicious Activity Detected")  
-        with col3: 
-            st.write(" ")
+        elif ((sms_result == 0) & ((len(malicious_df) == 0) | (len(url_result) == 0))):
+            col1, col2, col3 = st.columns([2,2,1])
+            with col1: 
+                st.write(" ")
+            with col2: 
+                st.image(checkIMG)
+                st.write("No Malicious Activity Detected")  
+            with col3: 
+                st.write(" ")
 
          
    
