@@ -105,7 +105,7 @@ if st.button("Enter"):
         malicious_df = pd.DataFrame()
 
     if ((sms_result == 1) & (len(url_result) == 0)):
-        col1, col2 = st.column([1.5,2])
+        col1, col2 = st.columns([1.5,2])
         with col1: 
             st.write(" ")
         with col2: 
@@ -114,14 +114,14 @@ if st.button("Enter"):
             
 
     elif ((sms_result == 1) & (len(malicious_df) > 0)):
-        col1, col2 = st.column([1.5,2])
+        col1, col2 = st.columns([1.5,2])
         with col1:
             st.write(" ")
         with col2:
             st.image(detectedIMG, width = 200)
             st.write("Malicious Activity Detected!")
         
-        col3, col4 = st.column([1,2])
+        col3, col4 = st.columns([1.25,2])
         with col3:
             st.write(" ")
         with col4:
@@ -136,7 +136,7 @@ if st.button("Enter"):
             st.image(detectedIMG, width = 200)
             st.write("Malicious Activity Detected!")
         
-        col3, col4 = st.column([1,2])
+        col3, col4 = st.columns([1.25,2])
         with col3:
             st.write(" ")
         with col4:
