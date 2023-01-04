@@ -116,7 +116,7 @@ with col1:
         elif ((sms_result == 0) & (len(malicious_df) > 0)):
             col1, col2, col3 = st.columns([1,6,1])
             st.write("")
-            st.Image('detectedIMG', width = 200)
+            st.image('detectedIMG', width = 200)
             st.write("Malicious Activity Detected!")
             st.write("List of detected malicious URLs:")
             st.write(malicious_df)
@@ -124,7 +124,7 @@ with col1:
             st.write(url_result)
 
         elif ((sms_result == 0) & ((len(malicious_df) == 0) | (len(url_result) == 0))):
-            st.Image('CheckIMG')
+            st.image('CheckIMG', width = 200)
             st.write("No Malicious Activity Detected")  
 
          
