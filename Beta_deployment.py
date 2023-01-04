@@ -129,8 +129,14 @@ if st.button("Enter"):
         st.write(url_result)
 
     elif ((sms_result == 0) & ((len(malicious_df) == 0) | (len(url_result) == 0))):
-        st.image(checkIMG)
-        st.write("No Malicious Activity Detected")  
+        col1, col2, col3 = st.columns([1,6,1])
+        with col1: 
+            st.write(" ")
+        with col2: 
+            st.image(checkIMG)
+            st.write("No Malicious Activity Detected")  
+        with col3: 
+            st.write(" ")
 
          
     st.button("Clear",on_click=restart)
