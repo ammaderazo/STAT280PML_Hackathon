@@ -89,12 +89,7 @@ sms = st.text_area("SMS/Email/Text to Investigate", key = "text")
 col1, col2 = st.columns([10,1])
 
 with col1:
-    st.write(" ")
-   
-with col2:
-    st.button("Clear Input", on_click = clear_text)
-
-if st.button("Enter"):
+    if st.button("Enter"):
     sms_result = detect_fraud_sms(sms)
     url_result = detect_fraud_urls(sms)
     with st.spinner('Analyzing the Input'):
@@ -110,23 +105,33 @@ if st.button("Enter"):
         st.write("Malicious Activity Detected!")
         
     elif ((sms_result == 1) & (len(malicious_df) > 0)):
-        st.Image('detectedIMG', width = 200)
-        st.write("Malicious Activity Detected!")
-        st.write("List of detected malicious URLs:")
-        st.write(malicious_df)
-        st.write("List of all the URLs found:")
-        st.write(url_result)
+        col1, col2, col3 = st.column([2,2,1])
+        with col1:
+            st.write(" ")
+        with col2:
+            st.image(detectedIMG, width = 200)
+            st.write("Malicious Activity Detected!")
+            st.write("List of detected malicious URLs:")
+            st.write(malicious_df)
+            st.write("List of all the URLs found:")
+            st.write(url_result)
+        with col3: 
+            st.write(" ")
     
 
     elif ((sms_result == 0) & (len(malicious_df) > 0)):
-        col1, col2, col3 = st.columns([1,6,1])
-        st.write("")
-        st.image('detectedIMG', width = 200)
-        st.write("Malicious Activity Detected!")
-        st.write("List of detected malicious URLs:")
-        st.write(malicious_df)
-        st.write("List of all the URLs found:")
-        st.write(url_result)
+        col1, col2, col3 = st.columns([2,2,1])
+        with col1: 
+            st.write(" ")
+        with col2: 
+            st.image(detectedIMG, width = 200)
+            st.write("Malicious Activity Detected!")
+            st.write("List of detected malicious URLs:")
+            st.write(malicious_df)
+            st.write("List of all the URLs found:")
+            st.write(url_result)
+        with col3: 
+            st.write(" ")
 
     elif ((sms_result == 0) & ((len(malicious_df) == 0) | (len(url_result) == 0))):
         col1, col2, col3 = st.columns([2,2,1])
@@ -139,4 +144,9 @@ if st.button("Enter"):
             st.write(" ")
 
          
+   
+with col2:
+    st.button("Clear Input", on_click = clear_text)
+
+
     st.button("Clear",on_click=restart)
