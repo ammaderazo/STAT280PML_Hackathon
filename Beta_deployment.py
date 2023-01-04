@@ -121,7 +121,7 @@ if st.button("Enter"):
             st.image(detectedIMG, width = 200)
             st.write("Malicious Activity Detected!")
         
-        col3, col4 = st.column([1.25,2])
+        col3, col4 = st.column([1,2])
         with col3:
             st.write(" ")
         with col4:
@@ -136,7 +136,7 @@ if st.button("Enter"):
             st.image(detectedIMG, width = 200)
             st.write("Malicious Activity Detected!")
         
-        col3, col4 = st.column([1.25,2])
+        col3, col4 = st.column([1,2])
         with col3:
             st.write(" ")
         with col4:
