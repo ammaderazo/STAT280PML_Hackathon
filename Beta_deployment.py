@@ -129,7 +129,7 @@ if st.button("Enter"):
         st.write(url_result)
 
     elif ((sms_result == 0) & ((len(malicious_df) == 0) | (len(url_result) == 0))):
-        col1, col2, col3 = st.columns([1,6,1])
+        col1, col2, col3 = st.columns([4,2,1])
         with col1: 
             st.write(" ")
         with col2: 
