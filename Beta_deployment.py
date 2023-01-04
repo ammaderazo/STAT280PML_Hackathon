@@ -105,8 +105,15 @@ if st.button("Enter"):
         malicious_df = pd.DataFrame()
 
     if ((sms_result == 1) & (len(url_result) == 0)):
-        st.Image('detectedIMG', width = 200)
-        st.write("Malicious Activity Detected!")
+        col1, col2, col3 = st.column([2,2,1])
+        with col1: 
+            st.write(" ")
+        with col2: 
+            st.image(detectedIMG, width = 200)
+            st.write("Malicious Activity Detected!")
+        with col3:
+            st.write(" ")
+
             
     elif ((sms_result == 1) & (len(malicious_df) > 0)):
         col1, col2, col3 = st.column([2,2,1])
