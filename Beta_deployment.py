@@ -81,6 +81,7 @@ def detect_fraud_sms(sms):
     sms_df = tfidf_model.transform(sms_df)
     sms_df = pd.DataFrame(sms_df.toarray())
     result = sms_detection.predict(sms_df)
+    result = result[0]
     return result 
 
 
