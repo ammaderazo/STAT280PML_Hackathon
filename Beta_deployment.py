@@ -17,8 +17,11 @@ from PIL import Image
 
 st.set_page_config(layout="wide")
 
-image = Image.open('DetectifAI.jpg')
-st.image(image)
+headerIMG = Image.open('DetectifAI.jpg')
+checkIMG = Image.open('checkmark.png')
+detectedIMG = Image.open('frauddetected.png')
+
+st.image(headerIMG)
 
 st.header("WebApp Deployment for Demo for PML Hackathon [Beta Ver.]")
 #st.caption("WebApp Deployment for Demo for PML Hackathon [Beta Ver.]")
@@ -55,7 +58,8 @@ def clear_text():
 def detect_fraud_urls(sms): 
     url_list = extractor.find_urls(sms)
     if (len(url_list) == 0): 
-        return "There are no urls in the sms"
+        result = pd.DataFrame() 
+        return result
     else: 
         for i in range(0,len(url_list)): 
             try: 
@@ -77,17 +81,7 @@ def detect_fraud_sms(sms):
     sms_df = tfidf_model.transform(sms_df)
     sms_df = pd.DataFrame(sms_df.toarray())
     result = sms_detection.predict(sms_df)
-    #return result[0]
-    if (result[0] == 0) :
-        return "SMS is not a malicious/fraud"
-    else:  
-        return "SMS is a malicious/fraud"
-
-
-    sms_result = detect_fraud_sms(sms)
-    url_result = detect_fraud_urls(sms)
- 
-
+    return result 
 
 
 sms = st.text_area("SMS/Email/Text to Investigate", key = "text")
@@ -98,25 +92,57 @@ with col1:
     if st.button("Enter"):
         sms_result = detect_fraud_sms(sms)
         url_result = detect_fraud_urls(sms)
-        with st.spinner('Analyzing the SMS'):
+        with st.spinner('Analyzing the Input'):
             time.sleep(5)
-            st.success('SMS checked!!')
-            st.write(sms_result)
-            st.write(url_result)
-        #if ((sms_result == "SMS is not a malicious/fraud") & (url_result == "There are no urls in the sms")):
-          #  st.write(sms)
-          #  st.write("No malicious activity detected in the sms")
-       # elif ((sms_result == "SMS is not a malicious/fraud") & (url_result != "There are no urls in the sms"))#: 
-           # st.write("There are no malicious activity detected in the sms")
-           # st.write("Here is a list and findings on the links included in the sms: ")
-          #  st.write(url_result)
-       # elif ((sms_result != "SMS is not a malicious/fraud") & (url_result == "There are no urls in the sms")): 
-           # st.write("Malicious activity is detected with the sms")
-       # elif ((sms_result != "SMS is not a malicious/fraud") & (url_result != "There are no urls in the sms")): 
-       #     st.write("Malicious activity is detected with the sms")
-       #     st.write("Here is a list and findings on the links included in the sms: ")
-       #     st.write(url_result)
-            
+            st.success('SMS/Email/Text checked!!')
+        malicious_df = url_result[url_result['type'] == 'Malicious']
+        if ((sms_result == 1) & (len(url_result) == 0)):
+            col1, col2, col3 = st.beta_columns([1,6,1])
+            with col1:
+                st.write("")
+            with col2:
+                st.Image('detectedIMG', width = 200)
+                st.write("Malicious Activity Detected!")
+            with col3:
+                st.write(" ")
+
+        elif ((sms_result == 1) & (len(malicious_df) > 0)):
+            col1, col2, col3 = st.beta_columns([1,6,1])
+            with col1:
+                st.write("")
+            with col2:
+                st.Image('detectedIMG', width = 200)
+                st.write("Malicious Activity Detected!")
+                st.write("List of detected malicious URLs:")
+                st.write(malicious_df)
+                st.write("List of all the URLs found:")
+                st.write(url_result)
+            with col3:
+                st.write("")    
+
+        elif ((sms_result == 0) & (len(malicious_df) > 0)):
+            col1, col2, col3 = st.beta_columns([1,6,1])
+            with col1:
+                st.write("")
+            with col2:
+                st.Image('detectedIMG', width = 200)
+                st.write("Malicious Activity Detected!")
+                st.write("List of detected malicious URLs:")
+                st.write(malicious_df)
+                st.write("List of all the URLs found:")
+                st.write(url_result)
+            with col3:
+                st.write("")  
+
+        elif ((sms_result == 0) & ((len(malicious_df) == 0) | (len(url_result) == 0))):
+            col1, col2, col3 = st.beta_columns([1,6,1])
+            with col1:
+                st.write("")
+            with col2:
+                st.Image('CheckIMG', width = 200)
+            with col3:
+                st.write("")  
+         
         st.button("Clear",on_click=restart)
 
 with col2:
