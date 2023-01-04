@@ -95,6 +95,7 @@ with col2:
     st.button("Clear Input", on_click = clear_text)
 
 if st.button("Enter"):
+    sms = sms.split(" ")
     for i in sms: 
         st.write(i)
     sms_result = detect_fraud_sms(sms)
