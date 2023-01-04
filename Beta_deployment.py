@@ -95,8 +95,8 @@ with col2:
     st.button("Clear Input", on_click = clear_text)
 
 if st.button("Enter"):
-    sms = list(sms)
-    st.write(sms)
+    for i in sms: 
+        st.write(i)
     sms_result = detect_fraud_sms(sms)
     url_result = detect_fraud_urls(sms)
     with st.spinner('Analyzing the Input'):
