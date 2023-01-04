@@ -100,7 +100,7 @@ with col1:
         except Exception:
             malicious_df = pd.DataFrame()
         if ((sms_result == 1) & (len(url_result) == 0)):
-            col1, col2, col3 = st.beta_columns([1,6,1])
+            col1, col2, col3 = st.columns([1,6,1])
             with col1:
                 st.write("")
             with col2:
@@ -110,7 +110,7 @@ with col1:
                 st.write(" ")
 
         elif ((sms_result == 1) & (len(malicious_df) > 0)):
-            col1, col2, col3 = st.beta_columns([1,6,1])
+            col1, col2, col3 = st.columns([1,6,1])
             with col1:
                 st.write("")
             with col2:
@@ -124,7 +124,7 @@ with col1:
                 st.write("")    
 
         elif ((sms_result == 0) & (len(malicious_df) > 0)):
-            col1, col2, col3 = st.beta_columns([1,6,1])
+            col1, col2, col3 = st.columns([1,6,1])
             with col1:
                 st.write("")
             with col2:
@@ -138,7 +138,7 @@ with col1:
                 st.write("")  
 
         elif ((sms_result == 0) & ((len(malicious_df) == 0) | (len(url_result) == 0))):
-            col1, col2, col3 = st.beta_columns([1,6,1])
+            col1, col2, col3 = st.columns([1,6,1])
             with col1:
                 st.write("")
             with col2:
