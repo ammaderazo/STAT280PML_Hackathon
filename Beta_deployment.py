@@ -120,4 +120,4 @@ with col1:
         st.button("Clear",on_click=restart)
 
 with col2:
-    st.button("Clear Text Input", on_click = clear_text)
+    st.button("Clear Input", on_click = clear_text)
