@@ -129,7 +129,7 @@ if st.button("Enter"):
         st.write(url_result)
 
     elif ((sms_result == 0) & ((len(malicious_df) == 0) | (len(url_result) == 0))):
-        st.image(CheckIMG)
+        st.image(checkIMG)
         st.write("No Malicious Activity Detected")  
 
          
