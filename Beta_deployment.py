@@ -131,7 +131,7 @@ if st.button("Enter"):
         
 
     elif ((sms_result == 0) & (len(malicious_df) > 0)):
-        col1, col2, col3 = st.columns([2,5,1])
+        col1, col2 = st.columns([2,2])
         with col1: 
             st.write(" ")
         with col2: 
@@ -141,11 +141,10 @@ if st.button("Enter"):
             st.write(malicious_df)
             st.write("List of all the URLs found:")
             st.write(url_result)
-        with col3: 
-            st.write(" ")
+       
 
     elif ((sms_result == 0) & ((len(malicious_df) == 0) | (len(url_result) == 0))):
-        col1, col2, col3 = st.columns([2,5,1])
+        col1, col2, col3 = st.columns([2,2,1])
         with col1: 
             st.write(" ")
         with col2: 
