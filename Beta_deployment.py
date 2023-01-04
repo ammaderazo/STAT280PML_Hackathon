@@ -18,7 +18,7 @@ from PIL import Image
 st.set_page_config(layout="wide")
 
 image = Image.open('DetectifAI.jpg')
-st.image(image)
+st.image(image, width=1920)
 
 st.header("WebApp Deployment for Demo for PML Hackathon [Beta Ver.]")
 #st.caption("WebApp Deployment for Demo for PML Hackathon [Beta Ver.]")
