@@ -95,7 +95,10 @@ with col1:
         with st.spinner('Analyzing the Input'):
             time.sleep(5)
             st.success('SMS/Email/Text checked!!')
-        malicious_df = url_result[url_result['type'] == 'Malicious']
+        try: 
+            malicious_df = url_result[url_result['type'] == 'Malicious']
+        except Exception:
+            malicious_df = pd.DataFrame()
         if ((sms_result == 1) & (len(url_result) == 0)):
             col1, col2, col3 = st.beta_columns([1,6,1])
             with col1:
@@ -142,6 +145,7 @@ with col1:
                 st.Image('CheckIMG', width = 200)
             with col3:
                 st.write("")  
+
          
         st.button("Clear",on_click=restart)
 
