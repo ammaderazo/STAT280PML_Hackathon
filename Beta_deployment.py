@@ -110,6 +110,7 @@ if st.button("Enter"):
             st.write(" ")
         with col2: 
             st.image(detectedIMG, width = 200)
+            st.write(sms_result)
             st.write("Malicious Activity Detected!")
             
 
@@ -119,6 +120,7 @@ if st.button("Enter"):
             st.write(" ")
         with col2:
             st.image(detectedIMG, width = 200)
+            st.write(sms_result)
             st.write("Malicious Activity Detected!")
         
         col3, col4 = st.columns([1.25,2])
@@ -134,6 +136,7 @@ if st.button("Enter"):
             st.write(" ")
         with col2: 
             st.image(detectedIMG, width = 200)
+            st.write(sms_result)
             st.write("Malicious Activity Detected!")
         
         col3, col4 = st.columns([1.25,2])
@@ -149,6 +152,7 @@ if st.button("Enter"):
             st.write(" ")
         with col2: 
             st.image(checkIMG)
+            st.write(sms_result)
             st.write("No Malicious Activity Detected")  
         with col3: 
             st.write(" ")
