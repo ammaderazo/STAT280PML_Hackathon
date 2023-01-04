@@ -131,7 +131,7 @@ if st.button("Enter"):
         
 
     elif ((sms_result == 0) & (len(malicious_df) > 0)):
-        col1, col2 = st.columns([2,2])
+        col1, col2 = st.columns([1.5,2])
         with col1: 
             st.write(" ")
         with col2: 
