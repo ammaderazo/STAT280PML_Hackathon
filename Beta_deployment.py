@@ -29,17 +29,28 @@ st.image(headerIMG)
 df = pd.read_csv('stopwords.csv')
 stopwords = list(df['i'])
 
-def fix_link(sms): 
+def fix_link(sms):
     a = sms.replace(".", " ")
     a = a.replace(",", " ")
-    a = a.split(" ")
-    if ("com" in a):
-        ind = a.index("com")
-        counter = 1
-        while ((a[ind-counter] == " ") |(a[ind-counter] == "")):
-            counter = counter + 1
-        link = a[ind-counter] + "." + a[ind] 
-        sms = sms +  " " + link
+    a = a.split()
+    count = 0
+    index_lst = []
+    
+    for i in a: 
+        if (i == "com"):
+            index_lst.append(count)
+        count = count + 1
+
+    if (len(index_lst)>0):
+        for c in index_lst: 
+            counter = 1
+            while ((a[c-counter] == " ") |(a[c-counter] == "")):
+
+                counter = counter + 1
+   
+            link = a[c-counter] + "." + a[c] 
+            sms = sms +  " " + link
+
     return sms
 
 def clean_sms(df):
