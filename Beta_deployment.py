@@ -30,7 +30,7 @@ df = pd.read_csv('stopwords.csv')
 stopwords = list(df['i'])
 
 def fix_link(sms): 
-    a = sms.replace(".", "")
+    a = sms.replace(".", " ")
     a = a.replace(",", " ")
     a = a.split(" ")
     if ("com" in a):
@@ -68,8 +68,6 @@ def clear_text():
 
 #creating a function for detecting malicious link 
 def detect_fraud_urls(sms): 
-    sms = sms.split(" ")
-    sms = fix_link(sms)
     url_list = extractor.find_urls(sms)
     if (len(url_list) == 0): 
         result = pd.DataFrame() 
@@ -109,6 +107,7 @@ with col2:
     st.button("Clear Input", on_click = clear_text)
 
 if st.button("Enter"):
+    sms = fix_link(sms)
     sms_result = detect_fraud_sms(sms)
     url_result = detect_fraud_urls(sms)
     with st.spinner('Analyzing the Input'):
