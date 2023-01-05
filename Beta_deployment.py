@@ -29,6 +29,15 @@ st.header("WebApp Deployment for Demo for PML Hackathon [Beta Ver.]")
 df = pd.read_csv('stopwords.csv')
 stopwords = list(df['i'])
 
+def fix_link(sms): 
+    a = sms.replace(".", "")
+    a = a.replace(",", "")
+    a = a.split(" ")
+    ind = a.index("com")
+    link = a[ind-1] + "." + a[ind]
+    sms = sms + " " + link
+    return sms
+
 def clean_sms(df):
     df['text'] = df['text'].str.replace(r'^.+@[^\.].*\.[a-z]{2,}$', 'emailad')                                                      #replaces detected email address to "emailad"
     df['text'] = df['text'].str.replace(r'^http\://[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(/\S*)?$', 'url')                                 #replaces detected url to "url"
@@ -76,6 +85,7 @@ def detect_fraud_urls(sms):
 
 #function for classifying the sms 
 def detect_fraud_sms(sms):
+    sms_df = fix_link(sms)
     sms_df = pd.DataFrame({'text': [sms]})
     sms_df = clean_sms(sms_df)
     sms_df = tfidf_model.transform(sms_df)
@@ -95,9 +105,6 @@ with col2:
     st.button("Clear Input", on_click = clear_text)
 
 if st.button("Enter"):
-    sms = sms.split(" ")
-    for i in sms: 
-        st.write(i)
     sms_result = detect_fraud_sms(sms)
     url_result = detect_fraud_urls(sms)
     with st.spinner('Analyzing the Input'):
