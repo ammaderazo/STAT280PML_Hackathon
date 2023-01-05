@@ -124,9 +124,8 @@ if st.button("Enter"):
             st.write(" ")
         with col2: 
             st.image(detectedIMG, width = 200)
-            st.write(sms_result)
             st.write("Malicious Activity Detected!")
-            
+            st.write(url_result)
 
     elif ((sms_result == 1) & (len(malicious_df) > 0)):
         col1, col2 = st.columns([1.5,2])
@@ -134,8 +133,8 @@ if st.button("Enter"):
             st.write(" ")
         with col2:
             st.image(detectedIMG, width = 200)
-            st.write(sms_result)
             st.write("Malicious Activity Detected!")
+            st.write(url_result)
         
         col3, col4 = st.columns([1.25,2])
         with col3:
@@ -143,6 +142,7 @@ if st.button("Enter"):
         with col4:
             st.write("List of detected malicious URLs:")
             st.write(malicious_df)
+            st.write(url_result)
       
     elif ((sms_result == 0) & (len(malicious_df) > 0)):
         col1, col2 = st.columns([1.5,2])
@@ -150,8 +150,8 @@ if st.button("Enter"):
             st.write(" ")
         with col2: 
             st.image(detectedIMG, width = 200)
-            st.write(sms_result)
             st.write("Malicious Activity Detected!")
+            st.write(url_result)
         
         col3, col4 = st.columns([1.25,2])
         with col3:
@@ -159,6 +159,7 @@ if st.button("Enter"):
         with col4:
             st.write("List of detected malicious URLs:")
             st.write(malicious_df)
+            st.write(url_result)
 
     elif ((sms_result == 0) & ((len(malicious_df) == 0) | (len(url_result) == 0))):
         col1, col2, col3 = st.columns([2,2,1])
@@ -166,8 +167,8 @@ if st.button("Enter"):
             st.write(" ")
         with col2: 
             st.image(checkIMG)
-            st.write(sms_result)
             st.write("No Malicious Activity Detected")  
+            st.write(url_result)
         with col3: 
             st.write(" ")
 
