@@ -68,6 +68,8 @@ def clear_text():
 
 #creating a function for detecting malicious link 
 def detect_fraud_urls(sms): 
+    sms = sms.split(" ")
+    sms = fix_link(sms)
     url_list = extractor.find_urls(sms)
     if (len(url_list) == 0): 
         result = pd.DataFrame() 
@@ -107,9 +109,6 @@ with col2:
     st.button("Clear Input", on_click = clear_text)
 
 if st.button("Enter"):
-    st.write(sms)
-    sms = sms.split(" ")
-    st.write(sms)
     sms_result = detect_fraud_sms(sms)
     url_result = detect_fraud_urls(sms)
     with st.spinner('Analyzing the Input'):
