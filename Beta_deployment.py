@@ -30,8 +30,8 @@ df = pd.read_csv('stopwords.csv')
 stopwords = list(df['i'])
 
 def fix_link(sms): 
-    a = sms.replace(".", " ")
-    a = a.replace(",", " ")
+    a = sms.replace(".", "")
+    a = a.replace(",", "")
     a = a.split(" ")
     if ("com" in a):
         ind = a.index("com")
@@ -107,9 +107,7 @@ with col2:
 
 if st.button("Enter"):
     sms = " ".join(line.strip() for line in sms.splitlines())
-    st.write(sms)
     sms = fix_link(sms)
-    st.write(sms)
     sms_result = detect_fraud_sms(sms)
     url_result = detect_fraud_urls(sms)
     with st.spinner('Analyzing the Input'):
