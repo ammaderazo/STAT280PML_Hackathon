@@ -108,7 +108,6 @@ with col2:
 if st.button("Enter"):
     sms = " ".join(line.strip() for line in sms.splitlines())
     sms = fix_link(sms)
-    st.write(sms)
     sms_result = detect_fraud_sms(sms)
     url_result = detect_fraud_urls(sms)
     with st.spinner('Analyzing the Input'):
