@@ -88,7 +88,6 @@ def detect_fraud_urls(sms):
 
 #function for classifying the sms 
 def detect_fraud_sms(sms):
-    sms_df = fix_link(sms)
     sms_df = pd.DataFrame({'text': [sms]})
     sms_df = clean_sms(sms_df)
     sms_df = tfidf_model.transform(sms_df)
@@ -108,6 +107,7 @@ with col2:
     st.button("Clear Input", on_click = clear_text)
 
 if st.button("Enter"):
+    sms_df = fix_link(sms)
     sms_result = detect_fraud_sms(sms)
     url_result = detect_fraud_urls(sms)
     with st.spinner('Analyzing the Input'):
