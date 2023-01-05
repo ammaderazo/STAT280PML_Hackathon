@@ -23,7 +23,7 @@ detectedIMG = Image.open('frauddetected.png')
 
 st.image(headerIMG)
 
-st.header("WebApp Deployment for Demo for PML Hackathon [Beta Ver.]")
+#st.header("WebApp Deployment for Demo for PML Hackathon [Beta Ver.]")
 #st.caption("WebApp Deployment for Demo for PML Hackathon [Beta Ver.]")
 
 df = pd.read_csv('stopwords.csv')
@@ -96,7 +96,6 @@ def detect_fraud_sms(sms):
     result = result[0]
     return result 
 
-
 sms = st.text_area("SMS/Email/Text to Investigate", key = "text")
 
 col1, col2 = st.columns([10,1])
@@ -116,8 +115,6 @@ if st.button("Enter"):
         time.sleep(5)
         st.success('SMS/Email/Text checked!!')
 
-    st.write(sms_result)
-    st.write(url_result)
     try: 
         malicious_df = url_result[url_result['type'] == 'Malicious']
     except Exception:
