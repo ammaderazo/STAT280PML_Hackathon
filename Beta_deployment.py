@@ -108,11 +108,15 @@ with col2:
 
 if st.button("Enter"):
     sms = fix_link(sms)
+    st.write(sms)
     sms_result = detect_fraud_sms(sms)
     url_result = detect_fraud_urls(sms)
     with st.spinner('Analyzing the Input'):
         time.sleep(5)
         st.success('SMS/Email/Text checked!!')
+
+    st.write(sms_result)
+    st.write(url_result)
     try: 
         malicious_df = url_result[url_result['type'] == 'Malicious']
     except Exception:
