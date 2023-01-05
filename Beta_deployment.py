@@ -30,12 +30,15 @@ df = pd.read_csv('stopwords.csv')
 stopwords = list(df['i'])
 
 def fix_link(sms): 
-    a = sms.replace(".", " ")
+    a = sms.replace(".", "")
     a = a.replace(",", " ")
     a = a.split(" ")
-    ind = a.index("com")
-    link = a[ind-1] + "." + a[ind]
-    sms = sms + " " + link
+    if ("com" in a):
+        ind = a.index("com")
+        print(ind)
+        link = a[ind-1] + "." + a[ind]
+        print(link)
+        sms = sms + " " + link
     return sms
 
 def clean_sms(df):
