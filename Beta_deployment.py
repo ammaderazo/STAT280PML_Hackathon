@@ -121,7 +121,7 @@ if st.button("Enter"):
 
     if ((sms_result == 1) & (len(url_result) == 0)):
         col1, col2 = st.columns([1.5,2])
-        with col1: 
+        with col1:  
             st.write(" ")
         with col2: 
             st.image(detectedIMG, width = 200)
