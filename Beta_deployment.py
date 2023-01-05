@@ -107,6 +107,7 @@ with col2:
     st.button("Clear Input", on_click = clear_text)
 
 if st.button("Enter"):
+    sms = " ".join(line.strip() for line in sms.splitlines())
     sms = fix_link(sms)
     st.write(sms)
     sms_result = detect_fraud_sms(sms)
